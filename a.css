@@ -1,0 +1,27 @@
+.bg-red{
+    background-color: red;
+}
+
+body {
+    background-color: lightblue;
+}
+
+h1{
+    color: white;
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+    color: yellow;
+    background-color: black;
+}
+
+#num {
+    background-color: orange;
+}
+
+ul>p {
+    color: tomato;
+}
