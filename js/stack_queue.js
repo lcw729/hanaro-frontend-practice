@@ -13,12 +13,27 @@ class Collection {
         return this;
     }
 
+    peek() {
+        return this.#arr.at(
+            this.isStack() ?  -1 : 0
+        );
+    }
+
+    isStack() {
+        return this.constructor.name === 'Stack';
+    }
+
     size() {
         return this.#arr?.length;
     }
 
     toString() {
         return `${this.constructor.name}(${this.size()})${JSON.stringify(this.#arr)}`;
+    }
+
+    toArray() {
+        // return this.#arr - shallow copy로 변경 가능 위험!!!!
+        return [...this.#arr];
     }
 
     print() {
