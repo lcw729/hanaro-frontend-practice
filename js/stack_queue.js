@@ -39,6 +39,16 @@ class Collection {
     print() {
         console.log(this.toString());
     }
+
+    *[Symbol.iterator]() { // iterator보다 generator 구현이 더 좋다.
+        for(let i = 0; i < this.size(); i += 1){
+            yield this._arr[i];
+        }
+    }
+
+    iterator() {
+        return this[Symbol.iterator]();
+    }
 }
 
 class Stack extends  Collection{
@@ -67,8 +77,15 @@ class Queue extends Collection{
 
 const stack = new Stack([1, 2]);
 stack.print();
-stack.push(3).push(5)
+stack.push(3).push(5);
 console.log('last pop=', stack.pop());
+console.log([...stack]);
+
+const itStack = stack.iterator();
+console.log(itStack.next());
+console.log(itStack.next());
+console.log(itStack.next());
+console.log(itStack.next());
 
 const queue = new Queue();
 queue.enqueue(10).enqueue(20);
