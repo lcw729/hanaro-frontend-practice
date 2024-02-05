@@ -1,3 +1,5 @@
+import { arrutils } from './utils/index.js'; // import하면 자동으로 관련 파일들이 실행된다.
+
 const arr = [1,2,3];
 console.log('arr: ', {...arr});
 console.log('arr: ',arr.entries());
@@ -180,5 +182,5 @@ console.log(users_2);
 // // objs의 각 원소를 reduce를 이용하여 합쳐보세요.
 const arr_ex10 = [{id : 1}, {name: 'Hong'}, {addr: 'Seoul', id: 5}];
 
-result2 = arr_ex10.reduce((acc, item) => ({ ...acc, ...item}), {});
+const result2 = arr_ex10.reduce((acc, item) => ({ ...acc, ...item}), {});
 console.log(result2);
