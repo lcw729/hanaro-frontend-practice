@@ -21,6 +21,7 @@ type nZ = {
     [i: string]: string | number;
     id: number;
 } & Y;
+// id: string & id: number => Never
 
 const ncompos: nZ = {id:1, name: 'Hong', addr: 'Seoul'};
 console.log(ncompos.addr);
