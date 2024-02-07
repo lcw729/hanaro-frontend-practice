@@ -65,7 +65,7 @@ type Guest = {
   age: number,
 };
 
-type Customer= Member | Guest; // 유니언 타입
+type Customer = Member | Guest; // 유니언 타입
 
 const cust: Customer = { // 유니언 타입은 freshness가 느슨해진다
                          // freshness - on
@@ -83,3 +83,40 @@ const g = { // fressness - off
   addr: '용산구',
   xxx: 1
 };
+
+
+function f(p: number | string) {
+  if (typeof p === "number")
+    return p.toFixed();
+  return p.toUpperCase();
+}
+
+function mg(user: Member | Guest) {
+  // if (typeof user === 'Member'){ // JS에서 사용 불가 - 아래와 같이 사용
+  // }
+
+  // user.hasOwnProperty('discountRate') -- 런타임 시, 알 수 있음. 사용하면 안됨.
+  if ('discountRate' in user) {
+    console.log(user.addr);
+  }
+
+  // if (user.hasOwnProperty('discountRate')) {
+  //   console.log(user.addr);
+  // }
+}
+
+class Dog {
+   bark() {}
+}
+
+class Cat {
+  gguk() {}
+}
+
+const lucy = new Dog();
+if (lucy instanceof Dog) lucy.bark();
+
+let un: {value: number} | undefined;
+if (un)
+  un.value = 11;
+
