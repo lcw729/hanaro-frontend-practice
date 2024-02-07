@@ -47,7 +47,7 @@ interface Console {
   blur(s: string): void;
 }
 
-console.blur('xx');
+// console.blur('xx');
 
 // 리터럴 타입
 const bt: 'A' | 'B' | 'AB' | 'O' = 'A';
@@ -120,3 +120,30 @@ let un: {value: number} | undefined;
 if (un)
   un.value = 11;
 
+type ANY = any; // go to reference를 사용해서 체크가능
+
+
+// function addx(a: ANY, b?: ANY) {
+// function addx(a: ANY, b: number | undefined) { // 인자 안보냈을 때 undefined로 인식안됨.
+// function addx(a: ANY, b: ANY = 10) { // default 값 지정
+function addx(a: ANY, b: number | undefined, c = 1): number {
+  return a + (b ?? 0);
+}
+
+
+type F = (a: ANY, b: number | undefined, c: number) => number;
+const addy = (a: ANY, b?: number, c = 1): number => {
+  console.log(`a ${a}, b ${b}, c ${c}`);
+  return a + (b ?? 0) + c;
+};
+
+console.log(addy(1, 2, 3));
+console.log(addy(1, 3));
+
+console.log(addx(1, undefined));
+
+
+let numArr: number[] = [1,2,3];
+numArr = [1];
+let numTuple: [number, number] = [1, 2]; // 사이즈가 정해져있음.
+numTuple = [3, 4];
