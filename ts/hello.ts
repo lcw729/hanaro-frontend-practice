@@ -234,3 +234,46 @@ const bts = ['A', 'B', 'O', 'AB'];
 type BT<T extends unknown[]> = T[number];
 const bloodType: BT<typeof bts> = 'AB';
 console.log(bloodType);
+
+interface Counts {
+  [key: string]: number
+}
+
+const counts: Counts = {};
+counts.apple = 3;
+counts.banana = 5;
+
+interface INovel {
+  title: string;
+  1: string;
+  [key: string]: string | number;
+}
+
+interface IndexSignature2 {
+  // [key: number]: string;
+  [key: string]: string | number;
+}
+
+const idxsig2: IndexSignature2 = {
+  1: 'str',
+  2: 22,
+  k: 'str'
+}
+
+interface A {
+  id: number | string;
+}
+
+interface B {
+  id: number;
+}
+
+interface C extends A {
+  name: string;
+  id: number | string;
+}
+
+// interface D extends B {
+//   name: string;
+//   id: number | string;
+// }
