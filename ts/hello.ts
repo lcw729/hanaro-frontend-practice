@@ -15,15 +15,15 @@ interface UserIF extends cityIF{
   name: string;
 }
 
-class User implements UserIF{
-  public id: number;
-  name: string;
-  city?: string;
-  constructor(id: number, name: 'Hong') {
-    this.id = id;
-    this.name = name;
-  }
-}
+// class User implements UserIF{
+//   public id: number;
+//   name: string;
+//   city?: string;
+//   constructor(id: number, name: 'Hong') {
+//     this.id = id;
+//     this.name = name;
+//   }
+// }
 
 type UserType = {
   id: number;
@@ -37,9 +37,9 @@ type CityType = {
 const s: string = 'abc';
 let i = 1;
 
-const hong: User = {id: 1, name: 'Hong'};
-const xxx = { id:2, name: 'Kim', addr:'Seoul'}; // freshness가 꺼진 상태
-const kim: User = xxx;
+// const hong: User = {id: 1, name: 'Hong'};
+// const xxx = { id:2, name: 'Kim', addr:'Seoul'}; // freshness가 꺼진 상태
+// const kim: User = xxx;
 // const kim: User = { id:2, name: 'Kim', addr:'Seoul'}; // freshness 상태 에러
 
 
@@ -147,3 +147,90 @@ let numArr: number[] = [1,2,3];
 numArr = [1];
 let numTuple: [number, number] = [1, 2]; // 사이즈가 정해져있음.
 numTuple = [3, 4];
+
+function func(age: number, gender?:string, name?:string) { // optional 매개변수는 뒤쪽으로 !
+  console.log('age: ', age);
+
+  if (typeof gender === 'string') {
+    console.log('gender :', gender);
+  }
+
+  if (typeof name === 'string') {
+    console.log('name :', name);
+  }
+}
+
+func(25, 'female', 'chaewon'); // age: 25, gender : female, name : chaewon
+func(25, undefined, 'chaewon'); // age: 25, name : chaewon
+func(25, 'chaewon'); // age: 25, gender: 'chaewon'
+
+
+type AF =  (n: number) => {}; // (n: number) => Object와 동일함. // number이지만 Object도 허용 - return에 대해 관대함.
+const af: AF = (n: number) => n ** 2;
+const af2: AF = function (n) {return n ** 3;}
+
+interface User {
+  name: string,
+  age: number,
+  init(this: User): () => {};
+}
+
+let user1: User = {
+  name: 'mjo',
+  age: 20,
+  init: function(this: User) {
+    return() => {
+      return this.age;
+    }
+  }
+}
+
+let getAge = user1.init();
+let age = getAge();
+
+// let numbers: (number|string)[];
+// numbers = [1,2,3,4,5];
+// numbers.push('six');
+
+type TUser22 = {id: number, name: string};
+const kim2 = {id:2, name: 'Kim', addr: 'Pusan'};
+const users:TUser22[] = [{id: 3, name: 'aa', addr: '1212'}, kim2];
+console.log(kim2);
+
+const dogInfo = ['Jama', 3] as const;
+// dogInfo[0] = 'Cream'; // 수정이 불가하다.
+
+const getNameAgeTuple = () : [string, number] => {
+  return ['Lim', 20]
+}
+
+const nameAndAge = getNameAgeTuple();
+
+const [myName, age2] = getNameAgeTuple();
+
+const a: [number, string, boolean] = [1, 'lim', false];
+a[0] = 20;
+console.log(a);
+
+
+let eArr1 = [1,2,3] as const;
+let eArr2 = [1,2,3];
+let fArr = [...eArr2] as const;
+
+
+type A1 = [string, number, string];
+type B1 = [boolean, C1];
+type C1 = {id: string}
+
+const a1:A1 = ['str', 1, 'B'];
+const c1:C1 = {id:'cccc'}
+const b1: B1 = [true, c1];
+
+// array => union
+// ex) ['A', 'B', 'O', 'AB']
+const bts = ['A', 'B', 'O', 'AB'];
+// type NA = Array<number>;
+// type Array<T> = T[]; // ==> number[]
+type BT<T extends unknown[]> = T[number];
+const bloodType: BT<typeof bts> = 'AB';
+console.log(bloodType);
