@@ -7,44 +7,87 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        html, body
+        {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+
+        h1 {
+            padding: 0;
+            margin: 0;
+        }
+
+        /*테이블 중앙 정렬*/
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        table {
+            /*테이블의 전체크기 - 80%*/
+            width: 80%;
+            height: 80%;
+            /*패딩 설정*/
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        thead {
+            /*제목줄 색상 설정*/
+            background-color: pink;
+        }
+
+        td, th {
+            /*텍스트 중앙 정렬*/
+            text-align: center;
+            vertical-align: center;
+            border: 1px solid black;
+        }
+
     </style>
 </head>
 <body>
-    <div>
-        <table border="1" id="tab">
-            <tr>
-                <th>방이름</th>
-                <th>대상</th>
-                <th>크기</th>
-                <th>가격</th>
-            </tr>
-            <tr>
-                <td>유채방</td>
-                <td>여성 도미토리</td>
-                <td rowspan="3">4인실</td>
-                <td rowspan="4">1인 20,000원</td>
-            </tr>
-            <tr>
-                <td rowspan="2">동백방</td>
-                <td>동성 도미토리</td>
-    <!--            <td rowspan="3">4인실</td>-->
-    <!--            <td rowspan="4">1인 20,000원</td>-->
-            </tr>
-            <tr>
-    <!--            <td>동백방</td>-->
-                <td>가족1팀</td>
-    <!--            <td rowspan="3">4인실</td>-->
-    <!--            <td rowspan="4">1인 20,000원</td>-->
-            </tr>
-            <tr>
-                <td>천혜향방</td>
-                <td>-</td>
-                <td>2인실</td>
-    <!--            <td rowspan="4">1인 20,000원</td>-->
-            </tr>
-            <tr>
-                <td colspan="4">바깥채 전체를 렌트합니다.</td>
-            </tr>
+    <h1>객실 구성</h1>
+    <div class="flex-center">
+        <table>
+            <caption>요안도라 객실 구성</caption>
+            <thead>
+                <tr>
+                    <th>방이름</th>
+                    <th>대상</th>
+                    <th>크기</th>
+                    <th>가격</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>유채방</td>
+                    <td>여성 도미토리</td>
+                    <td rowspan="3">4인실</td>
+                    <td rowspan="4">1인 20,000원</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">동백방</td>
+                    <td>동성 도미토리</td>
+                </tr>
+                <tr>
+                    <td>가족1팀</td>
+                </tr>
+                <tr>
+                    <td>천혜향방</td>
+                    <td>-</td>
+                    <td>2인실</td>
+                </tr>
+                <tr>
+                    <td colspan="4">바깥채 전체를 렌트합니다.</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </body>
