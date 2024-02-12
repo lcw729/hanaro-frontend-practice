@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="dom.js" defer></script>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        div {
+            border: 1px solid blue;
+            padding: 5px;
+        }
+
+        .bg-yellow {
+            background-color: yellow;
+        }
+
+        .show {
+            display: block;
+        }
+
+        th, td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <table id="mytable" border="1" style="margin-bottom: 20px">
+        <caption>User List</caption>
+        <thead>
+<!--            row에 3개의 cell이 있다.-->
+            <tr>
+                <th style="width: 50px;">ID</th>
+                <th style="width: 100px;">Name</th>
+                <th style="width: 80px;">...</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Hong</td>
+                <td rowspan="2">Seoul</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Kim</td>
+            </tr>
+            <tr>
+                <td colspan="2">Choi</td>
+                <td>Seoul</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="div1">
+        <h3>div1</h3>
+        <div id="div2" style="background-color: lightgray; text-align: center">
+            <h5>div2</h5>
+            <button id="btn">Button</button>
+        </div>
+    </div>
+<!--    <ul class="bg-yellow">-->
+<!--        <li id="li1">aaa</li>-->
+<!--        <li id="li2">bbb</li>-->
+<!--        <li id="li3">ccc</li>-->
+<!--    </ul>-->
+
+    <form action="" id="frm">
+        <button id="btnSubmit">Submit</button>
+    </form>
+</body>
+</html>
