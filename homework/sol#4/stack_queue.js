@@ -6,7 +6,9 @@ class Collection {
     constructor(...args) {
         this._arr = Array.isArray(args[0]) ? args[0] : args;
     }
-    get _arr() {}
+    get _arr() {
+        return this._arr;
+    }
     push(value) {
         this._arr.push(value);
         return this;

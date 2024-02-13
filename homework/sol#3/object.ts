@@ -29,4 +29,4 @@ interface SnsUser {
 }
 
 const naverUser: SnsUser = {userid: 1, username: 'HH', email: 'abc@naver.com'};
-const kakaoUser: SnsUser = {userid: 1, userName: 'HH', email: 'abc@hanmail.net'};
+const kakaoUser: SnsUser = {userid: 1, userName: 'HH', kakaotalk: 'HH', email: 'abc@hanmail.net'};

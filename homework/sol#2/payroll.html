@@ -86,7 +86,7 @@
 
                 // 초과수당
                 const overtime = (item["work_time"] - baseTime);
-                const overtimePay = (((item["work_time"] - baseTime) > 0) ? overtime : 0) * item["per_pay"] * (overtimePayPercent / 100);
+                const overtimePay = ((overtime > 0) ? overtime : 0) * item["per_pay"] * (overtimePayPercent / 100);
                 cells[COL_IDX["overtime_pay"]] = overtimePay;
 
                 // 합계
