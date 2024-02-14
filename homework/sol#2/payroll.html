@@ -15,15 +15,11 @@
 
         td, th {
             border: 1px solid black;
-            padding: 8px;]
+            padding: 8px;
         }
 
         th {
             text-align: center;
-        }
-
-        div {
-            padding: 8px;
         }
     </style>
 </head>
@@ -57,8 +53,8 @@
 
             // data row 추가
             const baseTime = data.base_time;
-            const overtimePayPercent = 50;
-            const taxPercent = 3.3;
+            const OVERTIME_PAY_PERCENT = 50;
+            const TAX_PERCENT = 3.3;
             let total = 0;
             const COL_IDX = {
                 "id": 0,
@@ -86,14 +82,14 @@
 
                 // 초과수당
                 const overtime = (item["work_time"] - baseTime);
-                const overtimePay = ((overtime > 0) ? overtime : 0) * item["per_pay"] * (overtimePayPercent / 100);
+                const overtimePay = ((overtime > 0) ? overtime : 0) * item["per_pay"] * (OVERTIME_PAY_PERCENT / 100);
                 cells[COL_IDX["overtime_pay"]] = overtimePay;
 
                 // 합계
                 cells[COL_IDX["total_amount"]] = overtimePay + regularPay;
 
                 // 세액
-                cells[COL_IDX["tax_amount"]] = cells[COL_IDX["total_amount"]] * taxPercent / 100;
+                cells[COL_IDX["tax_amount"]] = cells[COL_IDX["total_amount"]] * TAX_PERCENT / 100;
 
                 // 실지불액
                 const actualPayment = cells[COL_IDX["total_amount"]] - cells[COL_IDX["tax_amount"]];

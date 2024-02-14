@@ -2,21 +2,21 @@
 const assert = require('assert'); // CJS
 
 class Collection {
-    _arr;
+    #arr;
     constructor(...args) {
-        this._arr = Array.isArray(args[0]) ? args[0] : args;
+        this.#arr = Array.isArray(args[0]) ? args[0] : args;
     }
     get _arr() {
-        return this._arr;
+        return this.#arr;
     }
     push(value) {
-        this._arr.push(value);
+        this.#arr.push(value);
         return this;
     }
 
 // 가장 (Stack:나중, Queue:먼저) 들어간 요소 반환 (요소 삭제 없음!)
     get peek() {
-        return this._arr.at(
+        return this.#arr.at(
             this.isStack() ? -1 : 0
         );
     }
@@ -27,29 +27,29 @@ class Collection {
 
 // 가장 (Stack:나중, Queue:먼저) 들어간 요소 반환 & 삭제
     get poll() {
-        return this._arr.splice(
+        return this.#arr.splice(
             (this.isStack()? -1 : 0), 1)[0];
     }
 // 모든 원소 지우기
     clear() {
-        this._arr.splice(0, this.size);
+        this.#arr.splice(0, this.size);
     }
 // array 타입 반환
     toArray() {
-        return [...this._arr];
+        return [...this.#arr];
     }
 // 가장 (Stack:나중, Queue:먼저) 들어간 요소 삭제(skip)
     remove() {
-        this._arr.splice(
+        this.#arr.splice(
             (this.isStack()? -1 : 0), 1);
     }
 // 원소가 하나도 없으면 true
     get isEmpty() {
-        return this._arr.length === 0;
+        return this.#arr.length === 0;
     }
 // 현재 원소의 개수
     get size() {
-        return this._arr.length;
+        return this.#arr.length;
     }
 }
 
