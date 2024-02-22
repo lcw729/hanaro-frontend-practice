@@ -22,12 +22,14 @@ export const useTimeout = (
     setup();
 
     return clear;
-  }, [...dependencies,delay, cb]);
+  }, dependencies);
 
+  // 어차피 매번 cb, delay 값은 변경되기 때문에, useCallback을 사용하게된 이유가 없어짐
+  // useRef를 이용해서 효율성을 높이자.
   const setup = useCallback(() => {
     console.log('set-up!!', delay, delayRef.current);
     timerRef.current = setTimeout(cbRef.current, delayRef.current);
-  },[cb, delay]);
+  },[]);
 
   const clear = useCallback(() => {
       clearTimeout(timerRef.current);
