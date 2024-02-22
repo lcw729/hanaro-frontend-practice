@@ -1,4 +1,5 @@
 import { LoginUser } from '../App.tsx';
+import { forwardRef } from 'react';
 
 
 type Props = {
@@ -6,7 +7,9 @@ type Props = {
   logout: () => void;
 };
 
-export const Profile = ({loginUser, logout}: Props) => {
+export const Profile = forwardRef(
+  ({loginUser, logout}: Props,) =>
+{
   console.log('@@@Profile');
   return (
     <>
@@ -14,4 +17,5 @@ export const Profile = ({loginUser, logout}: Props) => {
       <button onClick={logout}>Logout</button>
     </>
   );
-};
+ }
+);

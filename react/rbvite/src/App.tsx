@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import { Hello } from './components/Hello.tsx';
 import { My } from './components/My.tsx';
+import { useTimeout } from './hooks/useTimeout.ts';
+import { useToggle } from './hooks/useToggle.ts';
 
 const myStyle = {backgroundColor: 'red'};
 
@@ -27,6 +29,9 @@ const SampleSession = {
 function App() {
   const [count, setCount] = useState(0);
   const [session, setSession] = useState<Session>(SampleSession);
+  const [isShow, toggle] = useToggle(false);
+  const { clear, reset } = useTimeout(() => console.log('isShow: ', isShow), 1000, [isShow]);
+  // const f = useCallback(() => console.log('isShow=', isShow), [])
 
   const plusCount = () => setCount(count + 1);
   const login = () => {};
@@ -37,6 +42,15 @@ function App() {
   return (
     <>
       <div>
+        <button
+          onClick={toggle}
+          style = {{border: `1px solid ${isShow ? 'blue' : 'yellow'}`}}
+        >
+          {isShow ? 'HIDE' : 'SHOW'}
+        </button>
+
+        <button onClick={reset}>타이머 리셋</button>
+        <button onClick={clear}>타이머 클리어</button>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -47,6 +61,7 @@ function App() {
       <h1 style={myStyle}>Vite + React</h1>
       <H5/>
       <My session={session} login={login} logout={logout}></My>
+      <input/>
       <Hello name={'이채원'} age={count + 30} plusCount={plusCount}>
         Hello-children!!!!
       </Hello>
