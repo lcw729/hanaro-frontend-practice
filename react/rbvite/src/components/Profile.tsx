@@ -1,21 +1,23 @@
-import { LoginUser } from '../App.tsx';
-import { forwardRef } from 'react';
+import { Ref, forwardRef } from 'react';
+import { useSession } from '../contexts/session-context';
 
+// type Props = {};
 
-type Props = {
-  loginUser: LoginUser;
-  logout: () => void;
-};
-
-export const Profile = forwardRef(
-  ({loginUser, logout}: Props,) =>
-{
-  console.log('@@@Profile');
+export const Profile = forwardRef((_, ref: Ref<HTMLButtonElement>) => {
+  const {
+    session: { loginUser },
+    logout,
+  } = useSession();
   return (
     <>
-      <div>User Name: {loginUser?.name}</div>
-      <button onClick={logout}>Logout</button>
+      <h3>
+        #{loginUser?.id}: {loginUser?.name}
+      </h3>
+      <button ref={ref} onClick={logout}>
+        Sign-out
+      </button>
     </>
   );
- }
-);
+});
+// console.log('::>>', Profile, typeof Profile);
+Profile.displayName = 'Profile';
