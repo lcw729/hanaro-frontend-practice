@@ -25,6 +25,11 @@ type SessionAction = {
   payload: string
 };
 
+enum ACTION {
+  PLUS = 'plus',
+  MINUS = 'minus,'
+};
+
 const reducer = (session: Session, action: SessionAction ) => {
   switch (action.type) {
     case 'login':
