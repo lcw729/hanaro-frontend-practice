@@ -16,7 +16,8 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    // 'prettier/prettier': 'error',
-    // quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    'react/no-array-index-key': 'error',
+    'prettier/prettier': 'error',
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
   },
 }

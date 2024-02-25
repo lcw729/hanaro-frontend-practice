@@ -1,20 +1,40 @@
-import { PropsWithChildren } from 'react';
+// import { PropsWithChildren } from 'react';
 
-type props = {
+type Props = {
   name: string,
   age: number,
-  plusCount: () => void,
-  // children: React.ReactNode
-};
-export const Hello = ({name, age, plusCount, children}: PropsWithChildren<props>) => {
+  plusCount: () => void;
+  children: React.ReactNode
+}
+// export const Hello = ({
+//                         name,
+//                         age,
+//                         plusCount,
+//                         children} : PropsWithChildren<Props>) => {
+
+// const Hello = ({
+//                                   name,
+//                                   age,
+//                                   plusCount,
+//                                   children,
+//                                 }: Props,
+// ) => {
+const Hello: React.FC<Props> = ({
+                 name,
+                 age,
+                 plusCount,
+                 children,
+               }
+) => {
   return (
-    <div style={{border: '1px solid green'}}>
+    <div style={{ border: '1px solid green' }}>
       <h3>
-        Hello, {name} {age}
+        Hello, {name} ({age})
       </h3>
       <button onClick={plusCount}>Plus Age</button>
-      <div>{children}</div>
+      {children}
     </div>
   );
 };
 
+export default Hello;
