@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useCounter } from '../contexts/counter-context.tsx';
 
 type Props = {
   login: (id: number, name: string) => void
@@ -7,8 +8,10 @@ type Props = {
 export const Login = ({login}: Props) => {
   const [id, setId] = useState(0);
   const [name, setName] = useState('');
+  const {count} = useCounter();
 
   return<>
+    <div>{count}</div>
     <form>
       <div>LoginID: {' '}
         <input type={'text'} onChange={(e) => setId(+e.currentTarget.value)}/>

@@ -1,9 +1,9 @@
 // import { PropsWithChildren } from 'react';
 
+import { useCounter } from '../contexts/counter-context.tsx';
+
 type Props = {
   name: string,
-  age: number,
-  plusCount: () => void;
   children: React.ReactNode
 }
 // export const Hello = ({
@@ -21,11 +21,10 @@ type Props = {
 // ) => {
 const Hello: React.FC<Props> = ({
                  name,
-                 age,
-                 plusCount,
                  children,
                }
 ) => {
+  const {count: age, plusCount} = useCounter();
   return (
     <div style={{ border: '1px solid green' }}>
       <h3>
