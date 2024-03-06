@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { useCounter } from '../contexts/counter-context.tsx';
+import { useSession } from '../contexts/session-context.tsx';
 
-type Props = {
-  login: (id: number, name: string) => void
-};
-
-export const Login = ({login}: Props) => {
+export const Login = () => {
   const [id, setId] = useState(0);
   const [name, setName] = useState('');
+  const {login} = useSession();
   const {count} = useCounter();
 
   return<>

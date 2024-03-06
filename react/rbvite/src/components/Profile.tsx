@@ -1,12 +1,10 @@
+import { useSession } from '../contexts/session-context.tsx';
 
-type Props = {
-  loginUser: LoginUser,
-  logout: () => void
-}
-export const Profile = ({loginUser, logout}: Props) => {
+export const Profile = () => {
+  const {session: {loginUser}, logout} = useSession();
   return <>
     <div>
-      <h3>{loginUser.name}</h3>
+      <h3>{loginUser?.name}</h3>
       <button onClick={logout}>SignOut</button>
     </div>
   </>

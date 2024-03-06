@@ -1,11 +1,13 @@
 // import { PropsWithChildren } from 'react';
 
 import { useCounter } from '../contexts/counter-context.tsx';
-
-type Props = {
-  name: string,
-  children: React.ReactNode
-}
+import { PropsWithChildren } from 'react';
+import { useSession } from '../contexts/session-context.tsx';
+//
+// type Props = {
+//   name: string,
+//   children: React.ReactNode
+// }
 // export const Hello = ({
 //                         name,
 //                         age,
@@ -19,11 +21,11 @@ type Props = {
 //                                   children,
 //                                 }: Props,
 // ) => {
-const Hello: React.FC<Props> = ({
-                 name,
+const Hello = ({
                  children,
-               }
-) => {
+               }: PropsWithChildren) => {
+  const { session } = useSession();
+  const name = session.loginUser?.name || 'Guest';
   const {count: age, plusCount} = useCounter();
   return (
     <div style={{ border: '1px solid green' }}>
