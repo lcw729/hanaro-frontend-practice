@@ -1,6 +1,7 @@
 import { Profile } from './Profile.tsx';
 import { Login } from './Login.tsx';
 import { useSession } from '../contexts/session-context.tsx';
+import { forwardRef, Ref } from 'react';
 //
 // type Props = {
 //   session: Session;
@@ -8,7 +9,7 @@ import { useSession } from '../contexts/session-context.tsx';
 //   logout: () => void;
 //   removeItem: (itemId: number) => void;
 // };
-export const My = () => {
+export const My = forwardRef((_: unknown, ref: Ref<HTMLButtonElement>) => {
   const { session, removeItem } = useSession();
   const { loginUser, cart } = session;
   // const removeItem = (id: number) => {
@@ -16,7 +17,7 @@ export const My = () => {
   // }
   return <>
     {loginUser ? (
-      <Profile />
+      <Profile ref={ref} />
     ) : (
       <Login />
     )}
@@ -29,4 +30,6 @@ export const My = () => {
       ))}
     </ul>
   </>;
-};
+});
+
+My.displayName = 'My';

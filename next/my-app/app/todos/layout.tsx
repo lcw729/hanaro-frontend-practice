@@ -9,19 +9,30 @@ export type Todo = {
     "completed": boolean,
 };
 
+const getTodos = async (userId = 1) => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`);
+
+    return res.json();
+}
 
 export default async function TodoLayout({children}: PropsWithChildren) {
-    const todos: Todo[] = await fetch('https://jsonplaceholder.typicode.com/todos').then((res) => res.json()) as Todo[];
+    const todos: Todo[] = await getTodos(1);
 
     return <>
         <h1>Todos</h1>
         <div className="flex flex-row">
             <div className="border border-dotted border-red-500 w-1/2 flex flex-col">
-                {
-                    todos.map((todo: Todo) => (
-                        <Link href={`/todos/${todo.id}`}>{todo.id}. {todo.title}</Link>
-                    ))
-                }
+                <ul>
+                    {
+                        todos.map((todo: Todo) => (
+                            <li>
+                                <Link href={`/todos/${todo.id}`}>
+                                    {todo.id}. {todo.title}
+                                </Link>
+                            </li>
+                        ))
+                    }
+                </ul>
             </div>
             {children}
         </div>

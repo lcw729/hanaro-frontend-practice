@@ -10,5 +10,7 @@ export type Todo = {
 };
 
 export default async function Todos() {
-    return <></>
+    return <>
+        <h1>Hello TODOS!</h1>
+    </>
 }
