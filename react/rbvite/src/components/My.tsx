@@ -1,5 +1,5 @@
 import { Profile } from './Profile.tsx';
-import { Login } from './Login.tsx';
+import { Login, LoginHandler } from './Login.tsx';
 import { useSession } from '../contexts/session-context.tsx';
 import { createRef, forwardRef, Ref, useImperativeHandle, useState } from 'react';
 //
@@ -13,12 +13,15 @@ export type colorHandlerProp = {
   turnOn: () => void;
   turnOff: () => void;
   signOut: () => void;
+  loginHandler: LoginHandler
 }
 export const My = forwardRef((_: unknown, ref: Ref<colorHandlerProp>) => {
   const { session, removeItem } = useSession();
   const { loginUser, cart } = session;
   const [color, onColor] = useState<boolean>(false);
   const logoutBtnRef = createRef<HTMLButtonElement>();
+  const loginRef = createRef<LoginHandler>();
+
 
   const colorHandler: colorHandlerProp = {
     turnOn: () => {
@@ -27,12 +30,15 @@ export const My = forwardRef((_: unknown, ref: Ref<colorHandlerProp>) => {
     },
     turnOff: () => onColor(false),
     signOut: () => logoutBtnRef.current?.click(),
+    loginHandler: {
+      // 객체가 새로 생성될 때마다 힙의 주소가 바뀌기 때문에 callback 함수 형태로 전달한다.
+      noti: (msg: string) => loginRef.current?.noti(msg),
+      focusId: () => loginRef.current?.focusId(),
+      focusName: () => loginRef.current?.focusName()
+    }
   };
 
   useImperativeHandle(ref, () => colorHandler);
-  // const removeItem = (id: number) => {
-  //   cart.pop(id)
-  // }
 
   return <>
     {
@@ -43,7 +49,7 @@ export const My = forwardRef((_: unknown, ref: Ref<colorHandlerProp>) => {
     {loginUser ? (
       <Profile ref={logoutBtnRef} />
     ) : (
-      <Login />
+      <Login ref={loginRef}/>
     )}
     <ul>
       {cart.map(({ id, name, price }: Cart) => (

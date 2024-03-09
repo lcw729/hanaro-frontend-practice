@@ -1,23 +1,51 @@
-import { useState } from 'react';
+import { forwardRef, Ref, useImperativeHandle, useRef } from 'react';
 import { useCounter } from '../contexts/counter-context.tsx';
 import { useSession } from '../contexts/session-context.tsx';
 
-export const Login = () => {
-  const [id, setId] = useState(0);
-  const [name, setName] = useState('');
-  const {login} = useSession();
-  const {count} = useCounter();
+export type LoginHandler = {
+  noti: (msg: string) => void;
+  focusId: () => void;
+  focusName: () => void;
+}
 
-  return<>
+export const Login = forwardRef((_: unknown, ref: Ref<LoginHandler>) => {
+  const idRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const { login } = useSession();
+  const { count } = useCounter();
+
+  const loginHandler: LoginHandler = {
+    noti: (msg: string) => {
+      alert(msg);
+      console.log(msg)
+    },
+    focusId: () => idRef.current?.focus(),
+    focusName: () => nameRef.current?.focus(),
+  };
+
+  useImperativeHandle(ref, () => loginHandler);
+
+  const onLogin = () => {
+    if (!idRef.current?.value)
+      alert('ID를 입력하세요.');
+    else if (!nameRef.current?.value)
+      alert('이름을 입력하세요.');
+    else
+      login(Number(idRef.current.value), nameRef.current.value);
+  };
+
+  return <>
     <div>{count}</div>
     <form>
       <div>LoginID: {' '}
-        <input type={'text'} onChange={(e) => setId(+e.currentTarget.value)}/>
+        <input type={'number'} ref={idRef} />
       </div>
       <div>LoginName: {' '}
-        <input type={'text'} onChange={(e) => setName(e.currentTarget.value)}/>
+        <input type={'text'} ref={nameRef} />
       </div>
-      <button onClick={() => login(id, name)}>SignIn</button>
+      <button onClick={() => onLogin()}>SignIn</button>
     </form>
-  </>
-}
+  </>;
+});
+
+Login.displayName = 'Login';

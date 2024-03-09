@@ -40,7 +40,6 @@ function App() {
   const colorBtnRef = createRef<colorHandlerProp>();
   console.log('Declare-Area');
 
-
   return (
     <>
       {/* <Effect /> */}
@@ -49,6 +48,7 @@ function App() {
         if (childInputRef.current) {
           childInputRef.current.focus();
           childInputRef.current.value = 'XXX';
+          colorBtnRef.current?.loginHandler.noti('안녕하세요.');
         }
       }}>
         Call H5 Button
