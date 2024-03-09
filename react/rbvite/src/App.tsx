@@ -1,6 +1,6 @@
 import './App.css';
 import Hello from './components/Hello.tsx';
-import { My } from './components/My.tsx';
+import { colorHandlerProp, My } from './components/My.tsx';
 import { useCounter } from './contexts/counter-context.tsx';
 import { createRef, forwardRef, LegacyRef } from 'react';
 
@@ -36,7 +36,8 @@ H5.displayName = 'H5';
 function App() {
   const { count, plusCount } = useCounter();
   const childInputRef = createRef<HTMLInputElement>();
-  const logoutBtnRef = createRef<HTMLButtonElement>();
+  // const logoutBtnRef = createRef<HTMLButtonElement>();
+  const colorBtnRef = createRef<colorHandlerProp>();
   console.log('Declare-Area');
 
 
@@ -47,14 +48,13 @@ function App() {
       <button onClick={() => {
         if (childInputRef.current) {
           childInputRef.current.focus();
-          childInputRef.current.value = "XXX";
+          childInputRef.current.value = 'XXX';
         }
       }}>
         Call H5 Button
       </button>
 
-
-      <button onClick={() => logoutBtnRef.current?.click()}>
+      <button onClick={() => colorBtnRef.current?.signOut()}>
         SignOut
       </button>
 
@@ -80,7 +80,17 @@ function App() {
           count is {count}
         </button>
       </div>
-      <My ref={logoutBtnRef}/>
+      <div className="flex flex-row justify-center">
+        <button className="m-5"
+                onClick={() => colorBtnRef.current?.turnOn()}>
+          TurnOn
+        </button>
+        <button className="m-5"
+                onClick={() => colorBtnRef.current?.turnOff()}>
+          TurnOff
+        </button>
+      </div>
+      <My ref={colorBtnRef} />
     </>
   );
 }
