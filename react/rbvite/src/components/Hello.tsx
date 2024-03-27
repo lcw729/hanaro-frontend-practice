@@ -26,13 +26,14 @@ const Hello = ({
                }: PropsWithChildren) => {
   const { session } = useSession();
   const name = session.loginUser?.name || 'Guest';
-  const {count: age, plusCount} = useCounter();
+  const {count: age, plusCount, minusCount} = useCounter();
   return (
     <div style={{ border: '1px solid green' }}>
       <h3>
         Hello, {name} ({age})
       </h3>
       <button onClick={plusCount}>Plus Age</button>
+      <button onClick={() => minusCount()}>Minus Age</button>
       {children}
     </div>
   );
