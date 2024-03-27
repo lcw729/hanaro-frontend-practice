@@ -1,10 +1,10 @@
-import { useReducer } from 'react';
+import { useState } from 'react';
 
 export const useToggle = (defaultFlag: boolean = false) => {
-  // const [flag, set] = useState(defaultFlag);
-  // const makeToggle = () => set(!flag);
-
-  const [flag, makeToggle] = useReducer((pre) => !pre, defaultFlag);
+  const [flag, setFlag] = useState(defaultFlag);
+  const makeToggle = () => {
+    setFlag((flag) => !flag);
+  };
 
   return [flag, makeToggle] as const;
 }
