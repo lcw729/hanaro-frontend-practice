@@ -3,6 +3,7 @@ import Hello from './components/Hello.tsx';
 import { colorHandlerProp, My } from './components/My.tsx';
 import { useCounter } from './contexts/counter-context.tsx';
 import { createRef, forwardRef, LegacyRef } from 'react';
+import Effect from './components/Effect.tsx';
 
 export type LoginUser = { id: number, name: string };
 export type Cart = { id: number, name: string, price: number };
@@ -42,7 +43,7 @@ function App() {
 
   return (
     <>
-      {/* <Effect /> */}
+       <Effect />
       <H5 title="forwardRef" ref={childInputRef} />
       <button onClick={() => {
         if (childInputRef.current) {

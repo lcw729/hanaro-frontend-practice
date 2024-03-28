@@ -18,6 +18,7 @@ type sessionContextProps = {
   login: (id: number, name: string) => void;
   logout: () => void;
   removeItem: (id: number) => void;
+  saveItem: (name: string, price: number) => void;
 }
 
 const SessionContext = createContext<sessionContextProps>({
@@ -27,6 +28,8 @@ const SessionContext = createContext<sessionContextProps>({
   logout: () => {
   },
   removeItem: () => {
+  },
+  saveItem: () => {
   },
 });
 
@@ -44,13 +47,28 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
   };
 
   const removeItem = (id: number) => {
-    const newCart = session.cart.filter((item) => {item.id !== id});
+    console.log(id);
+    const newCart = session.cart.filter((item: Cart) => id !== item.id
+    );
+    newCart.map((item) => {console.log(item.name)});
     setSession({...session, cart: newCart});
+  }
+
+
+  const saveItem = (name: string, price: number) => {
+    let max = 0;
+    let newCart: Cart[] = session.cart;
+    newCart.forEach((current: Cart) =>  {
+      if (current.id > max)
+        max = current.id;
+    })
+    newCart.push({id: max + 1, name: name, price: price});
+    setSession({...session, cart: newCart})
   }
 
   return (
     <>
-      <SessionContext.Provider value={{session, login, logout, removeItem}}>
+      <SessionContext.Provider value={{session, login, logout, removeItem, saveItem}}>
         {children}
       </SessionContext.Provider>
     </>

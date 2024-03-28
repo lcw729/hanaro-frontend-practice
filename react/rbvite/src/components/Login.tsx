@@ -1,4 +1,4 @@
-import { forwardRef, Ref, useImperativeHandle, useRef } from 'react';
+import { forwardRef, Ref, useEffect, useImperativeHandle, useRef } from 'react';
 import { useCounter } from '../contexts/counter-context.tsx';
 import { useSession } from '../contexts/session-context.tsx';
 
@@ -12,7 +12,17 @@ export const Login = forwardRef((_: unknown, ref: Ref<LoginHandler>) => {
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const { login } = useSession();
-  const { count } = useCounter();
+  const { count,plusCount, minusCount } = useCounter();
+
+  useEffect(() => {
+    plusCount();
+    console.log("로그인 => ", count);
+    return () => {
+      console.log("clean-up");
+      minusCount();
+      console.log("로그인 => ", count);
+    }
+  }, []);
 
   const loginHandler: LoginHandler = {
     noti: (msg: string) => {
