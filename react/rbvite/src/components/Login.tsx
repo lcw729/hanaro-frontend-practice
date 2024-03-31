@@ -22,7 +22,7 @@ export const Login = forwardRef((_: unknown, ref: Ref<LoginHandler>) => {
       minusCount();
       console.log("로그인 => ", count);
     }
-  }, []);
+  }, [plusCount, minusCount]);
 
   const loginHandler: LoginHandler = {
     noti: (msg: string) => {

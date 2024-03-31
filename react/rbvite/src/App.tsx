@@ -3,7 +3,8 @@ import Hello from './components/Hello.tsx';
 import { colorHandlerProp, My } from './components/My.tsx';
 import { useCounter } from './contexts/counter-context.tsx';
 import { createRef, forwardRef, LegacyRef } from 'react';
-import Effect from './components/Effect.tsx';
+import myUseTimeout from './hooks/myUseTimeout.ts';
+import { useToggle } from './hooks/useToggle.ts';
 
 export type LoginUser = { id: number, name: string };
 export type Cart = { id: number, name: string, price: number };
@@ -39,12 +40,19 @@ function App() {
   const childInputRef = createRef<HTMLInputElement>();
   // const logoutBtnRef = createRef<HTMLButtonElement>();
   const colorBtnRef = createRef<colorHandlerProp>();
+  const [isShow, toggle] = useToggle();
   console.log('Declare-Area');
+  myUseTimeout(()=> console.log('X'), 1000);
+  myUseTimeout(()=> console.log('Hello'), 1000);
 
   return (
     <>
-       <Effect />
       <H5 title="forwardRef" ref={childInputRef} />
+      <button onClick={() => toggle()}
+        style={{ background: isShow ? 'blue' : 'pink' }}>
+        {isShow ? 'HIDE' : 'SHOW'}
+      </button>
+      <br/>
       <button onClick={() => {
         if (childInputRef.current) {
           childInputRef.current.focus();
@@ -67,6 +75,16 @@ function App() {
           </div>
         </Hello>
       </div>
+      <div className="flex flex-row justify-center">
+        <button className="m-5"
+                onClick={() => colorBtnRef.current?.turnOn()}>
+          TurnOn
+        </button>
+        <button className="m-5"
+                onClick={() => colorBtnRef.current?.turnOff()}>
+          TurnOff
+        </button>
+      </div>
       <div className="card">
         <button onClick={
           () => {
@@ -79,16 +97,6 @@ function App() {
           }
         }>
           count is {count}
-        </button>
-      </div>
-      <div className="flex flex-row justify-center">
-        <button className="m-5"
-                onClick={() => colorBtnRef.current?.turnOn()}>
-          TurnOn
-        </button>
-        <button className="m-5"
-                onClick={() => colorBtnRef.current?.turnOff()}>
-          TurnOff
         </button>
       </div>
       <My ref={colorBtnRef} />
