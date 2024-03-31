@@ -6,22 +6,15 @@ export  default function myUseTimeout(
   dependencies: unknown[]
   ){
   const timer = useRef<ReturnType<typeof setTimeout>>();
-  // const cb = useRef(callback);
-
-  /*
-  useEffect(() => {
-    console.log('타이머 시작!')
-    timer.current = setTimeout(callback,delay);
-    return () => {
-      console.log("타이머 종료!")
-      clearTimeout(timer.current);
-    }
-  }, dependencies);
-   */
+  const cb = useRef(callback);
+  cb.current = callback;
+  const dy = useRef(delay);
+  dy.current = delay;
 
   const setup = useCallback(() => {
-    timer.current = setTimeout(callback,delay);
-  }, [...dependencies, callback, delay]);
+    console.log(delay, dy.current);
+    timer.current = setTimeout(cb.current,dy.current);
+  }, [...dependencies]);
 
   const reset = useCallback(() => {
     console.log("타이머 종료!");
