@@ -35,12 +35,12 @@ const reducer = (count: number, { type, payload = 1 }: ReducerAction) => {
 
 // provider 생성
 export const CounterProvider = ({ children }: PropsWithChildren) => {
-  /*
+    /*
     const [count, setCounter] = useState<number>(0);
-
-    const plusCount = () => setCounter(counter => counter + 1);
-    const minusCount = () => setCounter(counter => counter - 1);
-  */
+    const plusMinusCount = (flag: 1|-1) => setCount((pre) => pre + flag);
+    const plusCount = useCallback(() => setCounter(counter => counter + 1),[]);
+    const minusCount = useCallback(() => setCounter(counter => counter - 1), []);
+    */
 
     const [count, dispatch] = useReducer(reducer, 0);
     const plusCount = () => dispatch({type: 'plus'});
