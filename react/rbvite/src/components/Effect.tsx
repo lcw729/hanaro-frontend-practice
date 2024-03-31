@@ -3,6 +3,16 @@ import { useEffect, useRef, useState } from 'react';
 export default function Effect() {
   const [isShow, setShow] = useState<boolean>(false);
   const hRef = useRef<HTMLHeadingElement>(null);
+  const [firstName, setFirstName] = useState<String>('');
+  const [lastName, setLastName] = useState<String>('');
+  const fullName = `${firstName} ${lastName}`;
+
+  /*
+  useEffect(() => {
+    setFullName(`${firstName} ${lastName}`);
+  }, [firstName, lastName]);
+   */
+
   // const [pos, setPos] = useState(0);
   /*
   const [r, rerender] = useState(0);
@@ -55,6 +65,9 @@ export default function Effect() {
   return <>
     {/*<h3>{badSec} :: {goodSec}</h3>*/}
     {/*<input type="text" onChange={() => rerender((p) => p + 1)} />*/}
+    <h2>{fullName}</h2>
+    <input type="text" onChange={(e) => setFirstName(e.currentTarget.value)}/>
+    <input type="text" onChange={(e) => setLastName(e.currentTarget.value)}/>
     <button onClick={() => setShow(!isShow)}>Show Effect</button>
     { isShow && <h1 ref={hRef}>Article!!!</h1>}
   </>;
