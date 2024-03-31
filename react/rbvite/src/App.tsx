@@ -42,11 +42,13 @@ function App() {
   const colorBtnRef = createRef<colorHandlerProp>();
   const [isShow, toggle] = useToggle();
   console.log('Declare-Area');
-  myUseTimeout(()=> console.log('X'), 1000);
-  myUseTimeout(()=> console.log('Hello'), 1000);
+
+  const [reset, clear] = myUseTimeout(()=> console.log("isShow=",isShow), 1000, [isShow]);
 
   return (
     <>
+      <button onClick={() => reset}>Reset</button>
+      <button onClick={() => clear}>Clear</button>
       <H5 title="forwardRef" ref={childInputRef} />
       <button onClick={() => toggle()}
         style={{ background: isShow ? 'blue' : 'pink' }}>
